@@ -18,6 +18,8 @@ class SurveyAgent:
         #
         self.df.text = self.df.text.apply(lambda x: x.strip().encode().decode())
         self.df = self.df[~self.df.text.str.contains("duplicate")]
+        self.df.text = self.df.text.apply(lambda x: x[0:x.find("Original Issue = ")])
+        self.df = self.df[self.df.label != '__label__0']
         #
         self.df['category_id'] = self.df['label'].factorize(sort=True)[0]
         self.category_id_df = self.df[['label', 'category_id']].drop_duplicates().sort_values('category_id')
@@ -40,7 +42,7 @@ class SurveyAgent:
 
 
     def getNgrams(self):
-        N = 2
+        N = 10
         for label, category_id in sorted(self.category_to_id.items()):
             features_chi2 = chi2(self.features, self.labels == category_id)
             indices = np.argsort(features_chi2[0])
@@ -68,14 +70,11 @@ class SurveyAgent:
         plt.show()
 
 
-
-
 ###############################################
 dataPath = "data\survey14DB.csv"
 Survey13 = SurveyAgent(dataPath)
-print(Survey13.df)
-##df.graphClasses()
-##Survey13.processData()
-##Survey13.getNgrams()
-##Survey13.modelFit()
-##Survey13.graphHeatMap()
+##Survey13.graphClasses()
+Survey13.processData()
+Survey13.getNgrams()
+Survey13.modelFit()
+Survey13.graphHeatMap()
