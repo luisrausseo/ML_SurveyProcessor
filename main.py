@@ -71,7 +71,7 @@ class SurveyAgent:
 
 
 ###############################################
-dataPath = "data\survey14DB.csv"
+dataPath = "data\survey14DBV2.csv"
 Survey13 = SurveyAgent(dataPath)
 ##Survey13.graphClasses()
 Survey13.processData()
