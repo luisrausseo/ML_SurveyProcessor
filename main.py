@@ -3,10 +3,21 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import chi2
 import numpy as np
+
+from sklearn import svm
+
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import cross_val_score
 
 class SurveyAgent:
     def __init__(self, dataPath):
@@ -18,8 +29,8 @@ class SurveyAgent:
         #
         self.df.text = self.df.text.apply(lambda x: x.strip().encode().decode())
         self.df = self.df[~self.df.text.str.contains("duplicate")]
-        self.df.text = self.df.text.apply(lambda x: x[0:x.find("Original Issue = ")])
-        self.df = self.df[self.df.label != '__label__0']
+        #self.df.text = self.df.text.apply(lambda x: x[0:x.find("Original Issue = ")])
+        #self.df = self.df[self.df.label != '__label__0']
         #
         self.df['category_id'] = self.df['label'].factorize(sort=True)[0]
         self.category_id_df = self.df[['label', 'category_id']].drop_duplicates().sort_values('category_id')
@@ -55,12 +66,14 @@ class SurveyAgent:
 
 
     def modelFit(self):
+        print("Fitting Model")
         self.model = LinearSVC()
-        self.X_train, self.X_test, self.y_train, self.y_test, self.indices_train, self.indices_test = train_test_split(self.features, self.labels, self.df.index, test_size=0.33, random_state=0)
+        self.X_train, self.X_test, self.y_train, self.y_test, self.indices_train, self.indices_test = train_test_split(self.features, self.labels, self.df.index, test_size=0.10, random_state=0)
         self.model.fit(self.X_train, self.y_train)
 
 
     def graphHeatMap(self):
+        print("Generating graph")
         self.y_pred = self.model.predict(self.X_test)
         conf_mat = confusion_matrix(self.y_test, self.y_pred)
         fig, ax = plt.subplots(figsize=(10,10))
@@ -69,12 +82,35 @@ class SurveyAgent:
         plt.xlabel('Predicted')
         plt.show()
 
+    def modelCompare(self):
+        models = [
+            RandomForestClassifier(n_estimators=200, max_depth=3, random_state=0),
+            LinearSVC(),
+            MultinomialNB(),
+            LogisticRegression(random_state=0),
+        ]
+        CV = 5
+        cv_df = pd.DataFrame(index=range(CV * len(models)))
+        entries = []
+        for model in models:
+          model_name = model.__class__.__name__
+          accuracies = cross_val_score(model, self.features, self.labels, scoring='accuracy', cv=CV)
+          for fold_idx, accuracy in enumerate(accuracies):
+            entries.append((model_name, fold_idx, accuracy))
+        cv_df = pd.DataFrame(entries, columns=['model_name', 'fold_idx', 'accuracy'])
+
+        sns.boxplot(x='model_name', y='accuracy', data=cv_df)
+        sns.stripplot(x='model_name', y='accuracy', data=cv_df, 
+                      size=8, jitter=True, edgecolor="gray", linewidth=2)
+        plt.show()
+
 
 ###############################################
 dataPath = "data\survey14DBV2.csv"
 Survey13 = SurveyAgent(dataPath)
 ##Survey13.graphClasses()
 Survey13.processData()
-Survey13.getNgrams()
+##Survey13.getNgrams()
 Survey13.modelFit()
 Survey13.graphHeatMap()
+##Survey13.modelCompare()
