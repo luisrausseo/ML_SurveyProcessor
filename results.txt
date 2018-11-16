@@ -3,3 +3,4 @@ Accuracy with SVM = 0.6546003016591252
 Accuracy with LSCV = 0.6907993966817496
 Accuacy with nltk: 0.6742081447963801 (ignore_stopwords=False)
 Accuacy with nltk: 0.6742081447963801 (ignore_stopwords=True)
+
