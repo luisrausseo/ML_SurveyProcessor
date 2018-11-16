@@ -32,7 +32,7 @@ class SurveyAgent:
         self.category_to_id = dict(self.category_id_df.values)
         self.labels = self.df.category_id
         id_to_category = dict(self.category_id_df[['category_id', 'label']].values)
-        self.X_train, self.X_test, self.y_train, self.y_test, self.indices_train, self.indices_test = train_test_split(self.df.text, self.df.label, self.df.index, test_size=0.10, random_state=0)
+        self.X_train, self.X_test, self.y_train, self.y_test, self.indices_train, self.indices_test = train_test_split(self.df.text, self.df.label, self.df.index, test_size=0.10, random_state=45)
         self.df.head()
 
     def graphClasses(self):
@@ -127,11 +127,11 @@ class SurveyAgent:
 ###############################################
 dataPath = "data\survey14DBV2.csv"
 Survey13 = SurveyAgent(dataPath)
-##Survey13.graphClasses()
+Survey13.graphClasses()
 ##Survey13.getNgrams(10)
 ##Survey13.graphHeatMap(Survey13.PipelineNB())
 ##Survey13.graphHeatMap(Survey13.PipelineSVM())
 ##Survey13.graphHeatMap(Survey13.PipelineLSCV())
 ##Survey13.gridSearchNB()
 ##Survey13.gridSearchSVM()
-Survey13.graphHeatMap(Survey13.nltkModel())
+##Survey13.graphHeatMap(Survey13.nltkModel())
