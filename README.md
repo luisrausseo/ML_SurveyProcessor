@@ -63,6 +63,7 @@ Accuracy with NB = 0.6606334841628959
 |__label__4|247|168|68.0%
 
 ### Stochastic Gradient Descent
+
 >**Stochastic Gradient Descent (SGD)** is a simple yet very efficient approach to discriminative learning of linear classifiers under convex loss functions such as (linear) [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) and [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression). Even though SGD has been around in the machine learning community for a long time, it has received a considerable amount of attention just recently in the context of large-scale learning.
 
 ```Python
@@ -87,6 +88,32 @@ Accuracy with SVM = 0.665158371040724
 |__label__2|352|227|64.5%
 |__label__3|10|4|40.0%
 |__label__4|245|173|70.6%
+
+#### Linear Support Vector Machine
+
+>[`LinearSVC`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC "sklearn.svm.LinearSVC") is another implementation of Support Vector Classification for the case of a linear kernel.
+
+```Python
+text_clf_lscv = Pipeline([('Tfidvect', TfidfVectorizer()), ('clf', LinearSVC())])
+text_clf_lscv = text_clf_lscv.fit(X_train, y_train)
+predicted_lscv = text_clf_lscv.predict(X_test)
+print("Accuracy with LSCV = " + str(np.mean(predicted_lscv == y_test)))
+```
+
+#### Results
+
+```
+Accuracy with LSCV = 0.6998491704374057
+```
+
+![SVM Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/LSVC.png)
+
+|Label|Pedicted|Correct|Percent
+|:-:|:-:|:-:|:-:|
+|__label__1|73|47|64.4%
+|__label__2|317|219|69.1%
+|__label__3|71|30|42.3%
+|__label__4|202|168|83.2%
 
 # References
 - [Python](https://www.python.org/)
