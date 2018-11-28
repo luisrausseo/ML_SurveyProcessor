@@ -49,18 +49,44 @@ print("Accuracy with NB = " + str(np.mean(predicted == y_test)))
 
 #### Results
 
-```Python
+```
 Accuracy with NB = 0.6606334841628959
 ```
 
 ![MultinomialNB Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/M_NB.png)
 
 |Label|Pedicted|Correct|Percent
-|-|-|-|-|
+|:-:|:-:|:-:|:-:|
 |__label__1|61|44|72.1%
 |__label__2|308|210|68.2%
 |__label__3|47|16|34.0%
 |__label__4|247|168|68.0%
+
+### Stochastic Gradient Descent
+>**Stochastic Gradient Descent (SGD)** is a simple yet very efficient approach to discriminative learning of linear classifiers under convex loss functions such as (linear) [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) and [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression). Even though SGD has been around in the machine learning community for a long time, it has received a considerable amount of attention just recently in the context of large-scale learning.
+
+```Python
+text_clf_svm = Pipeline([('Tfidvect', TfidfVectorizer()),
+                         ('clf-svm', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, max_iter=5, random_state=45, shuffle=True))])
+text_clf_svm = text_clf_svm.fit(X_train, y_train)
+predicted_svm = text_clf_svm.predict(X_test)
+print("Accuracy with SVM = " + str(np.mean(predicted_svm == y_test)))
+```
+
+#### Results
+
+```
+Accuracy with SVM = 0.665158371040724
+```
+
+![SVM Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/M_NB.png)
+
+|Label|Pedicted|Correct|Percent
+|:-:|:-:|:-:|:-:|
+|__label__1|56|37|66.1%
+|__label__2|352|227|64.5%
+|__label__3|10|4|40.0%
+|__label__4|245|173|70.6%
 
 # References
 - [Python](https://www.python.org/)

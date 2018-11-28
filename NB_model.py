@@ -65,7 +65,7 @@ class SurveyAgent:
 
     def PipelineSVM(self):
         text_clf_svm = Pipeline([('Tfidvect', TfidfVectorizer()),
-                                 ('clf-svm', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, max_iter=5, random_state=45))])
+                                 ('clf-svm', SGDClassifier(loss='hinge', penalty='l2',alpha=1e-3, max_iter=5, random_state=45, shuffle=True))])
         text_clf_svm = text_clf_svm.fit(self.X_train, self.y_train)
         predicted_svm = text_clf_svm.predict(self.X_test)
         print("Accuracy with SVM = " + str(np.mean(predicted_svm == self.y_test)))
@@ -129,8 +129,8 @@ dataPath = "data\survey14DBV2.csv"
 Survey13 = SurveyAgent(dataPath)
 # Survey13.graphClasses()
 ##Survey13.getNgrams(10)
-Survey13.graphHeatMap(Survey13.PipelineNB())
-##Survey13.graphHeatMap(Survey13.PipelineSVM())
+# Survey13.graphHeatMap(Survey13.PipelineNB())
+Survey13.graphHeatMap(Survey13.PipelineSVM())
 ##Survey13.graphHeatMap(Survey13.PipelineLSCV())
 ##Survey13.gridSearchNB()
 ##Survey13.gridSearchSVM()
