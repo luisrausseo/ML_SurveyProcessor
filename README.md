@@ -37,18 +37,27 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 After processing the raw data, we split the data for out train and test set. The test set is 10% of the total data. Then we apply the machine learning algorithms to get the desired results.
 
 ### Naive Bayes classifier for multinomial models (MultinomialNB)
+
+>[`MultinomialNB`](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.MultinomialNB.html#sklearn.naive_bayes.MultinomialNB "sklearn.naive_bayes.MultinomialNB") implements the naive Bayes algorithm for multinomially distributed data, and is one of the two classic naive Bayes variants used in text classification (where the data are typically represented as word vector counts, although tf-idf vectors are also known to work well in practice).
+
 ```Python
 text_clf = Pipeline([('Tfidvect', TfidfVectorizer()), ('clf', MultinomialNB(fit_prior=False))])
 text_clf = text_clf.fit(X_train, y_train)
 predicted = text_clf.predict(X_test)
 ```
 #### Results
+
 ```Python
 Accuracy with NB = 0.6606334841628959
 ```
 ![MultinomialNB Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/M_NB.png)
 
-
+|Label|Pedicted|Correct|Percent
+|-|-|-|-|
+|__label__1|61|44|72.1%
+|__label__2|308|210|68.2%
+|__label__3|47|16|34.0%
+|__label__4|247|168|68.0%
 
 # References
 - [Python](https://www.python.org/)
