@@ -110,7 +110,7 @@ class SurveyAgent:
 
         predicted_mnb_stemmed = text_mnb_stemmed.predict(self.X_test)
 
-        print("Accuacy with nltk: " + str(np.mean(predicted_mnb_stemmed == self.y_test)))
+        print("Accuracy with nltk: " + str(np.mean(predicted_mnb_stemmed == self.y_test)))
         return text_mnb_stemmed
 
     def graphHeatMap(self, model):
@@ -131,7 +131,7 @@ Survey13 = SurveyAgent(dataPath)
 ##Survey13.getNgrams(10)
 # Survey13.graphHeatMap(Survey13.PipelineNB())
 # Survey13.graphHeatMap(Survey13.PipelineSVM())
-Survey13.graphHeatMap(Survey13.PipelineLSCV())
+# Survey13.graphHeatMap(Survey13.PipelineLSCV())
 ##Survey13.gridSearchNB()
 ##Survey13.gridSearchSVM()
-##Survey13.graphHeatMap(Survey13.nltkModel())
+Survey13.graphHeatMap(Survey13.nltkModel())

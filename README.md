@@ -106,7 +106,7 @@ print("Accuracy with LSCV = " + str(np.mean(predicted_lscv == y_test)))
 Accuracy with LSCV = 0.6998491704374057
 ```
 
-![SVM Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/LSVC.png)
+![LSCV Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/LSVC.png)
 
 |Label|Pedicted|Correct|Percent
 |:-:|:-:|:-:|:-:|
@@ -114,6 +114,39 @@ Accuracy with LSCV = 0.6998491704374057
 |__label__2|317|219|69.1%
 |__label__3|71|30|42.3%
 |__label__4|202|168|83.2%
+
+### Natural Language Toolkit
+
+```Python
+stemmer = SnowballStemmer("english", ignore_stopwords=True)
+       
+class StemmedCountVectorizer(CountVectorizer):
+	def build_analyzer(self):
+	    analyzer = super(StemmedCountVectorizer, self).build_analyzer()
+        return lambda doc: ([stemmer.stem(w) for w in analyzer(doc)])
+            
+stemmed_count_vect = StemmedCountVectorizer(stop_words='english')
+text_mnb_stemmed = Pipeline([('vect', stemmed_count_vect), ('tfidf', TfidfTransformer()), 
+                             ('mnb', MultinomialNB(fit_prior=False))])
+text_mnb_stemmed = text_mnb_stemmed.fit(X_train, y_train)
+predicted_mnb_stemmed = text_mnb_stemmed.predict(X_test)
+print("Accuracy with nltk: " + str(np.mean(predicted_mnb_stemmed == y_test)))
+```
+
+#### Results
+
+```
+Accuracy with nltk: 0.6591251885369532
+```
+
+![NLKT Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/NLKT.png)
+
+|Label|Pedicted|Correct|Percent
+|:-:|:-:|:-:|:-:|
+|__label__1|82|51|62.2%
+|__label__2|299|207|69.2%
+|__label__3|83|27|32.5%
+|__label__4|199|152|76.4%
 
 # References
 - [Python](https://www.python.org/)
