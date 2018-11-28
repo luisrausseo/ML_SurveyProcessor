@@ -127,9 +127,9 @@ class SurveyAgent:
 ###############################################
 dataPath = "data\survey14DBV2.csv"
 Survey13 = SurveyAgent(dataPath)
-Survey13.graphClasses()
+# Survey13.graphClasses()
 ##Survey13.getNgrams(10)
-##Survey13.graphHeatMap(Survey13.PipelineNB())
+Survey13.graphHeatMap(Survey13.PipelineNB())
 ##Survey13.graphHeatMap(Survey13.PipelineSVM())
 ##Survey13.graphHeatMap(Survey13.PipelineLSCV())
 ##Survey13.gridSearchNB()

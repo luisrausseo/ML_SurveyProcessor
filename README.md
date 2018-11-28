@@ -30,3 +30,7 @@ There are XXXX entries in which the text from the comment is available, as well 
 One of the proposed solution of how to automate this process, is to use a machine learning algorithm to assign the scores. For this purpose, several Python machine learning algorithms are compared to define their performance in this particular problem. 
 
 To handle text data, the bag of words models is used. 
+
+'''Python
+from sklearn.feature_extraction.text import TfidfVectorizer
+'''
