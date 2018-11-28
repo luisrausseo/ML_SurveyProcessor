@@ -29,8 +29,32 @@ There are XXXX entries in which the text from the comment is available, as well 
 
 One of the proposed solution of how to automate this process, is to use a machine learning algorithm to assign the scores. For this purpose, several Python machine learning algorithms are compared to define their performance in this particular problem. 
 
-To handle text data, the bag of words models is used. 
+To handle text data, the bag of words models is used. To achieve that, TfidVectorizer is used to process the raw data.
 
-'''Python
+```Python
 from sklearn.feature_extraction.text import TfidfVectorizer
-'''
+```
+After processing the raw data, we split the data for out train and test set. The test set is 10% of the total data. Then we apply the machine learning algorithms to get the desired results.
+
+### Naive Bayes classifier for multinomial models (MultinomialNB)
+```Python
+text_clf = Pipeline([('Tfidvect', TfidfVectorizer()), ('clf', MultinomialNB(fit_prior=False))])
+text_clf = text_clf.fit(X_train, y_train)
+predicted = text_clf.predict(X_test)
+```
+#### Results
+```Python
+Accuracy with NB = 0.6606334841628959
+```
+![MultinomialNB Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/M_NB.png)
+
+
+
+# References
+- [Python](https://www.python.org/)
+- [Scikit-learn](https://scikit-learn.org/stable/)
+- [Numpy](http://www.numpy.org/)
+- [Natural Language Toolkit](https://www.nltk.org/)
+- [Matplotlib](https://matplotlib.org/)
+- [Seaborn](https://seaborn.pydata.org/)
+- [Pandas](https://pandas.pydata.org/)
