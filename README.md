@@ -12,3 +12,14 @@ For the purpose of this study, the scores -1 and 0 are not considered, since the
 
 - If it is negative, it will always be -1.
 - If the comment is empty, it will be 0.
+
+## The Data
+
+There are XXXX entries in which the text from the comment is available, as well as its score in the format "__label__X" where X can be an integer from 1 to 4. 
+
+| Label        | Text           |
+| ------------- |--------------|
+| __label__3      | Every single time I have a technical issue, and I contact you all, I receive immediate service!  It surprises me and pleases me every time.  From my experiences, using ITHelpcentral is easy, fast, and worry free.  Thank you! |
+| __label__3      | I appreciate the walk-in service very much.  It is invaluable.      |
+| __label__2 | amazing !      |
+
