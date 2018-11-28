@@ -13,6 +13,8 @@ For the purpose of this study, the scores -1 and 0 are not considered, since the
 - If it is negative, it will always be -1.
 - If the comment is empty, it will be 0.
 
+After receiving the survey's feedback from the customer, an agent in the quality team process it and give a subjective score to the customer comments. 
+
 ## The Data
 
 There are XXXX entries in which the text from the comment is available, as well as its score in the format "__label__X" where X can be an integer from 1 to 4. 
@@ -23,3 +25,8 @@ There are XXXX entries in which the text from the comment is available, as well 
 | __label__3      | I appreciate the walk-in service very much.  It is invaluable.      |
 | __label__2 | amazing !      |
 
+## Approach
+
+One of the proposed solution of how to automate this process, is to use a machine learning algorithm to assign the scores. For this purpose, several Python machine learning algorithms are compared to define their performance in this particular problem. 
+
+To handle text data, the bag of words models is used. 
