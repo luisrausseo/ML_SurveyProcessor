@@ -44,12 +44,15 @@ After processing the raw data, we split the data for out train and test set. The
 text_clf = Pipeline([('Tfidvect', TfidfVectorizer()), ('clf', MultinomialNB(fit_prior=False))])
 text_clf = text_clf.fit(X_train, y_train)
 predicted = text_clf.predict(X_test)
+print("Accuracy with NB = " + str(np.mean(predicted == y_test)))
 ```
+
 #### Results
 
 ```Python
 Accuracy with NB = 0.6606334841628959
 ```
+
 ![MultinomialNB Heatmap](https://github.com/luisrausseo/ML_SurveyProcessor/blob/master/results/M_NB.png)
 
 |Label|Pedicted|Correct|Percent
