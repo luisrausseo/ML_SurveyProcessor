@@ -148,7 +148,25 @@ Accuracy with nltk: 0.6591251885369532
 |__label__3|83|27|32.5%
 |__label__4|199|152|76.4%
 
-# References
+## Observations
+
+- Visually the LinearSVC model shows better accuracy overall for the four labels. 
+- There is a diffused area around the center of the graph: __label__2 and __label__3. This is caused by the subjectivity of the score: what an agent might consider a score of 3, another one can decide that is a 2. If we consider both labels in labels 2 and 3 for the LinearSVC model, the percentage significantly increases.
+
+|Label|Pedicted|Correct|Percent
+|:-:|:-:|:-:|:-:|
+|__label__1|73|47|64.4%
+|__label__2|317|276|87.1%
+|__label__3|71|56|78.9%
+|__label__4|202|168|83.2%
+
+## Pending
+
+- Attempt to clean further the data.
+- Review discrepancies between labels 2 and 3.
+- Seek other models to compare with. 
+
+## References
 - [Python](https://www.python.org/)
 - [Scikit-learn](https://scikit-learn.org/stable/)
 - [Numpy](http://www.numpy.org/)
