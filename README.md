@@ -89,7 +89,7 @@ Accuracy with SVM = 0.665158371040724
 |__label__3|10|4|40.0%
 |__label__4|245|173|70.6%
 
-#### Linear Support Vector Machine
+### Linear Support Vector Machine
 
 >[`LinearSVC`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC "sklearn.svm.LinearSVC") is another implementation of Support Vector Classification for the case of a linear kernel.
 
