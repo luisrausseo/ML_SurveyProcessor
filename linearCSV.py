@@ -35,10 +35,7 @@ class SurveyAgent:
 		return text_clf_lscv
 		
 	def getData(self):
-		server = "Kadett.ttu.edu"
-		user = "hc_webapps"
-		password = "Uf9sOsUw"
-		dataBase = "Footprints"
+		
 		
 		conn = pymssql.connect(server, user, password, dataBase)
 		cursor = conn.cursor()
